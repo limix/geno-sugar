@@ -14,6 +14,6 @@ bgen_reader
 
 TODO
 
-# Mantainer
+# Developer
 
 Francesco Paolo Casale
