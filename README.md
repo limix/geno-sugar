@@ -1,2 +1,15 @@
 # geno-sugar
-Utilities for handling genetic data for GWAS
+Utility functions to read bed and bgen files and facilitate genome-wide analyses.
+
+# Dependencies
+
+numpy
+scipy
+pandas
+limix_core
+pandas_plink
+bgen_reader
+
+# Install
+
+TODO
