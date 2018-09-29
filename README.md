@@ -13,3 +13,7 @@ bgen_reader
 # Install
 
 TODO
+
+# Mantainer
+
+Francesco Paolo Casale
