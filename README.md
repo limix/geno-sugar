@@ -38,44 +38,50 @@ The documentation is in HTML and will be available at
 
 # Quick start
 
-.. _quickstart:
+We here show how to run geno-wide analysis using plink and bgen files using geno-sugar.
 
-*********************
-Quick Start in Python
-*********************
-
-We here show how to run geno-wide analysis using plink and bgen files
-using geno-sugar.
-
-Plink file example
-^^^^^^^^^^^^^^^^^^
+## Plink file example
 
 Before getting started, let's get some data::
 
+    ```bash
     wget http://www.ebi.ac.uk/~casale/data_structlmm.zip
     unzip data_structlmm.zip
+    ```
 
 Now we are ready to go.
 
-.. literalinclude:: quickstart_plink.py
-   :encoding: latin-1
+    ```python
+    import numpy as np
+    from pandas_plink import read_plink
+    import geno_sugar as gs
+    from sklearn.preprocessing import Imputer
 
-The following script can be downloader :download:`here <quickstart_plink.py>`.
+    # import genotype file
+    bedfile = 'data_structlmm/chrom22_subsample20_maf0.10'
+    (bim, fam, G) = read_plink(bedfile)
 
-Bgen file example
-^^^^^^^^^^^^^^^^^
+    # subsample snps
+    Isnp = gs.is_in(bim, ('22', 17500000, 18500000))
+    G, bim = gs.snp_query(G, bim, Isnp)
 
-Before getting started, let's get some data::
+    # define geno preprocessing function
+    impute = gs.preprocess.impute(Imputer(missing_values=np.nan, strategy='mean', axis=1))
+    standardize = gs.preprocess.standardize()
+    preprocess = gs.preprocess.compose([impute, standardize])
 
-    mkdir data
-    wget https://github.com/limix/bgen-reader-py/blob/master/example/example.bgen data/.
+    # define filtering function
+    filter = gs.unique_variants
 
-Now we are ready to go.
+    # loop on geno
+    queue = gs.GenoQueue(G, bim, batch_size=200, preprocess=preprocess, filter=filter)
+    for _G, _bim in queue:
+        print('.. loaded %d/%d variants' % (_G.shape[0], G.shape[0]))
+    ```
 
-.. literalinclude:: quickstart_bgen.py
-   :encoding: latin-1
+## Bgen file example
 
-The following script can be downloader :download:`here <quickstart_bgen.py>`.
+TODO
 
 # Developer
 
