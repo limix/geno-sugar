@@ -9,6 +9,7 @@ Geno Sugar!
 
    install
    quickstart
+   public
 
 *****************
 Comments and bugs
