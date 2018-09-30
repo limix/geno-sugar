@@ -5,7 +5,7 @@ Utility functions to read bed and bgen files and facilitate genome-wide analyses
 
 Geno-sugar requires scipy, numpy, matplotlib, pandas, scikit-learn, pandas_plink and bgen_reader among other Python packages.
 
-* Create a new environment in conda_::
+* Create a new conda environment:
 
     ```bash
     conda create -n geno-sugar python=3.6
