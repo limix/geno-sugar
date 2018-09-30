@@ -83,6 +83,3 @@ for _G, _bim in queue:
 
 TODO
 
-# Developer
-
-Francesco Paolo Casale
