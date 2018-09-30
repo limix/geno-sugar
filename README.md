@@ -44,10 +44,10 @@ We here show how to run geno-wide analysis using plink and bgen files using geno
 
 Before getting started, let's get some data::
 
-    ```bash
-    wget http://www.ebi.ac.uk/~casale/data_structlmm.zip
-    unzip data_structlmm.zip
-    ```
+```bash
+wget http://www.ebi.ac.uk/~casale/data_structlmm.zip
+unzip data_structlmm.zip
+```
 
 Now we are ready to go.
 
