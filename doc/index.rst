@@ -1,20 +1,19 @@
-.. Geno Sugar documentation master file, created by
-   sphinx-quickstart on Sat Sep 29 18:44:49 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to Geno Sugar's documentation!
-======================================
+===========
+Geno Sugar!
+===========
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :caption: Table of contents
+   :name: mastertoc
+   :maxdepth: 3
 
+   install
+   quickstart
 
+*****************
+Comments and bugs
+*****************
 
-Indices and tables
-==================
+You can get the source and open issues `on Github.`_
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. _on Github.: https://github.com/limix/geno_sugar

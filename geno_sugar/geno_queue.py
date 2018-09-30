@@ -39,8 +39,6 @@ class GenoQueue:
         if self.current >= self.end:
             raise StopIteration
         else:
-            import pdb
-            pdb.set_trace()
             _end = self.current + self.batch_size
             Isnp = (self.bim.i>=self.current) & (self.bim.i<_end)
             G_out, bim_out = snp_query(self.G, self.bim, Isnp)
