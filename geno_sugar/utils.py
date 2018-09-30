@@ -3,10 +3,10 @@ import pandas as pd
 import dask.array as da
 
 def snp_query(G, bim, Isnp):
-    """
+    r"""
     Parameters
     ----------
-    G : (snps, inds) array
+    G : (`n_snps`, `n_inds`) array
         Genetic data
     bim : pandas.DataFrame
         Variant annotation
@@ -15,7 +15,7 @@ def snp_query(G, bim, Isnp):
 
     Returns
     -------
-    G_out : (snps, inds) array
+    G_out : (`n_snps`, `n_inds`) array
         filtered genetic data
     bim_out : dataframe
         filtered variant annotation
@@ -29,7 +29,7 @@ def snp_query(G, bim, Isnp):
 
 
 def is_in(bim, geno_range):
-    """
+    r"""
     Parameters
     ----------
     bim : pandas.DataFrame
@@ -49,12 +49,12 @@ def is_in(bim, geno_range):
 
 
 def standardize_snps(G):
-    """
+    r"""
     Standardize variantes.
 
     Parameters
     ----------
-    G : (snps, inds) array
+    G : (`n_snps`, `n_inds`) array
         Genetic data
 
     Returns
@@ -71,15 +71,17 @@ def standardize_snps(G):
 def unique_variants(G, bim):
     r"""
     Filters out variants with the same genetic profile.
+
     Parameters
     ----------
-        G : nd array
-            (snps, inds) array of genotype values
+        G : (`n_snps`, `n_inds`) array
+            Genetic data
         bim : pandas.DataFrame
             Variant annotation
+
     Returns
     -------
-        G_out : (snps, inds) array
+        G_out : (`n_snps`, `n_inds`) array
             filtered genetic data
         bim_out : dataframe
             filtered variant annotation
@@ -90,3 +92,4 @@ def unique_variants(G, bim):
     v, ix = sp.unique(_s, return_index=True)
     Isnp = sp.in1d(sp.arange(_s.shape[0]), ix)
     return snp_query(G, bim, Isnp)
+
