@@ -13,6 +13,7 @@ from .utils import standardize_snps
 from .utils import unique_variants
 from .geno_queue import GenoQueue
 from . import preprocess
+from ._testit import test
 
 __version__ = "0.0.1"
 
@@ -24,6 +25,7 @@ __all__ = [
     "snp_query",
     "is_in",
     "unique_variants",
+    "test",
     "__version__",
 ]
 
