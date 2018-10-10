@@ -10,12 +10,8 @@ def get_version():
 
 
 extensions = [
-    "matplotlib.sphinxext.plot_directive",
     "sphinx.ext.autodoc",
     "sphinx.ext.doctest",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.coverage",
-    "sphinx.ext.mathjax",
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
 ]
@@ -46,4 +42,3 @@ texinfo_documents = [
         "Miscellaneous",
     )
 ]
-intersphinx_mapping = {"https://docs.python.org/": None, "http://matplotlib.org": None}
