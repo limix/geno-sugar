@@ -93,4 +93,3 @@ def unique_variants(G, bim):
     v, ix = sp.unique(_s, return_index=True)
     Isnp = sp.in1d(sp.arange(_s.shape[0]), ix)
     return snp_query(G, bim, Isnp)
-
