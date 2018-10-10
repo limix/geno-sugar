@@ -1,4 +1,3 @@
-import scipy as sp
 from .composition import compose_funcs
 from .utils import standardize_snps
 

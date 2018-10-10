@@ -18,17 +18,13 @@ class GenoQueue:
     preprocess : function
         preprocess function
     """
-    def __init__(self,
-                    G,
-                    bim,
-                    batch_size=1000,
-                    preprocess=None,
-                    filter=None):
+
+    def __init__(self, G, bim, batch_size=1000, preprocess=None, filter=None):
         self.G = G
         self.bim = bim
         self.batch_size = batch_size
         self.preprocess = preprocess
-        self.filter = filter 
+        self.filter = filter
         self.current = 0
         self.end = bim.shape[0]
 
@@ -40,7 +36,7 @@ class GenoQueue:
             raise StopIteration
         else:
             _end = self.current + self.batch_size
-            Isnp = (self.bim.i>=self.current) & (self.bim.i<_end)
+            Isnp = (self.bim.i >= self.current) & (self.bim.i < _end)
             G_out, bim_out = snp_query(self.G, self.bim, Isnp)
             if self.preprocess is not None:
                 G_out = self.preprocess(G_out)
