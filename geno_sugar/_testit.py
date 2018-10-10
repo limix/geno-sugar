@@ -15,12 +15,7 @@ def test(verbose=True):
 
     pandas_format()
 
-    args = [
-        "--doctest-plus",
-        "--doctest-plus-rtol=1e-04",
-        "--doctest-plus-atol=1e-04",
-        "--doctest-modules",
-    ]
+    args = ["--doctest-modules"]
     if not verbose:
         args += ["--quiet"]
 
