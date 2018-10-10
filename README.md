@@ -1,7 +1,8 @@
 # geno-sugar
+
 Utility functions to read bed and bgen files and facilitate genome-wide analyses.
 
-# Install
+## Install
 
 Geno-sugar requires scipy, numpy, matplotlib, pandas, scikit-learn, pandas_plink and bgen_reader among other Python packages.
 
@@ -36,7 +37,7 @@ Geno-sugar requires scipy, numpy, matplotlib, pandas, scikit-learn, pandas_plink
 The documentation is in HTML and will be available at
 ``_build/html/index.html``.
 
-# Quick start
+## Quick start
 
 We here show how to run geno-wide analysis using plink and bgen files using geno-sugar.
 
@@ -82,4 +83,3 @@ for _G, _bim in queue:
 ## Bgen file example
 
 TODO
-
