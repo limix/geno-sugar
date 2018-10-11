@@ -11,6 +11,8 @@ from .utils import snp_query
 from .utils import is_in
 from .utils import standardize_snps
 from .utils import unique_variants
+from ._sh import download
+from ._sh import unzip
 from .geno_queue import GenoQueue
 from . import preprocess
 from ._testit import test
@@ -25,6 +27,8 @@ __all__ = [
     "snp_query",
     "is_in",
     "unique_variants",
+    "download",
+    "unzip",
     "test",
     "__version__",
 ]
