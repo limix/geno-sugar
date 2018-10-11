@@ -21,11 +21,9 @@ def snp_query(G, bim, Isnp):
     bim_out : dataframe
         filtered variant annotation
     """
-    bim_out = bim[Isnp]
+    bim_out = bim[Isnp].reset_index(drop=True)
     G_out = G[bim_out.i.values]
-    pd.options.mode.chained_assignment = None
-    bim_out.i = sp.arange(G_out.shape[0])
-    pd.options.mode.chained_assignment = "warn"
+    bim_out.i = pd.Series(sp.arange(bim_out.shape[0]), index=bim_out.index)
     return G_out, bim_out
 
 
@@ -55,41 +53,36 @@ def standardize_snps(G):
 
     Parameters
     ----------
-    G : (`n_snps`, `n_inds`) array
+    G : (`n_inds`, `n_snps`) array
         Genetic data
 
     Returns
     -------
     G_out : standardized array
     """
-    if type(G) == da.core.Array:
-        G = G.compute()
-    std = G.std(1)[:, None]
-    mean = G.mean(1)[:, None]
+    mean = G.mean(0)
+    std = G.std(0)
     return (G - mean) / std
 
 
-def unique_variants(G, bim):
+def unique_variants(G):
     r"""
     Filters out variants with the same genetic profile.
 
     Parameters
     ----------
-        G : (`n_snps`, `n_inds`) array
+        G : (`n_inds`, `n_snps`) array
             Genetic data
-        bim : pandas.DataFrame
-            Variant annotation
 
     Returns
     -------
-        G_out : (`n_snps`, `n_inds`) array
+        G_out : (`n_inds`, `n_unique_snps`) array
             filtered genetic data
-        bim_out : dataframe
-            filtered variant annotation
+        idxs : int array
+            indexes of the the unique variants
     """
-    if type(G) == da.core.Array:
-        G = G.compute()
-    _s = sp.dot(G, sp.rand(G.shape[1]))
+    _s = sp.dot(sp.rand(G.shape[0]), G)
     v, ix = sp.unique(_s, return_index=True)
-    Isnp = sp.in1d(sp.arange(_s.shape[0]), ix)
-    return snp_query(G, bim, Isnp)
+    ix = sp.sort(ix)
+    G_out = G[:, ix]
+    return G_out, Isnp
