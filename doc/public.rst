@@ -40,7 +40,7 @@ Iterator class facilitating genome-wide analyses by
 (i) loading the genetic data in batches of snps, and
 (ii) applying user-specified functions for preprocessing and filtering.
 
-.. automodule:: geno_sugar.geno_queue.GenoQueue
+.. autoclass:: geno_sugar.geno_queue.GenoQueue
   :members:
 
 
