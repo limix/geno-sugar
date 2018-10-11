@@ -1,12 +1,7 @@
 language: python
-matrix:
-  include:
-    - os: linux
-      python:
-        - 2.7
-        - 3.6
-    - os: osx
-      python: 3.6
+python:
+- 2.7
+- 3.6
 env:
 - PKG_NAME=geno_sugar
 script:
