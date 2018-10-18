@@ -3,4 +3,4 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - bgen-reader=2.0.4=py27h470a237_1
+  - bgen-reader=2.0.7
