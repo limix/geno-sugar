@@ -12,4 +12,4 @@ pip install geno-sugar
 
 ## Documentation
 
-Examples and public interface can be found [here](https://geno-sugar.readthedocs.io/en/latest/install.html)
+Examples and public interface can be found [here](https://geno-sugar.readthedocs.io/en/latest/index.html)
