@@ -249,52 +249,116 @@ Bgen file example
     from numpy.random import RandomState
     from bgen_reader import read_bgen, compute_dosage, allele_expectation
     from sklearn.impute import SimpleImputer
-    
+
     import geno_sugar as gs
     import geno_sugar.preprocess as prep
-    
-    gs.download("https://github.com/limix/bgen-reader-py/blob/master/example/example.bgen?raw=true")
-    
+
+    gs.download(
+        "https://github.com/limix/bgen-reader-py/blob/master/example/example.bgen?raw=true"
+    )
+
     # define random state
     random = RandomState(1)
-    
+
     # import genotype file
     bgen_file = "example.bgen"
     bgen = read_bgen(bgen_file, verbose=False)
     bim = bgen["variants"]
+    bim["i"] = range(len(bim))
     G = compute_dosage(allele_expectation(bgen["genotype"], nalleles=2, ploidy=2))
     print(bim)
     print(G)
-    # TODO: We need to fix this error:
-    # Traceback (most recent call last):
-    #   File "ex.py", line 25, in <module>
-    #     G, bim = gs.snp_query(G, bim, Isnp)
-    #   File "/Users/horta/code/horta/geno-sugar/geno_sugar/utils.py", line 25, in snp_query
-    #     G_out = G[bim_out.i.values]
-    #   File "/usr/local/anaconda3/envs/default/lib/python3.7/site-packages/pandas/core/generic.py", line 4376, in __getattr__
-    #     return object.__getattribute__(self, name)
-    # AttributeError: 'DataFrame' object has no attribute 'i'
-    
+
     # subsample snps
-    Isnp = gs.is_in(bim, ("22", 17500000, 28500000))
+    Isnp = gs.is_in(bim, ("01", 10000, 14000))
     G, bim = gs.snp_query(G, bim, Isnp)
-    
+
     # define geno preprocessing function
     imputer = SimpleImputer(missing_values=np.nan, strategy="mean")
-    preprocess = prep.compose([
-                    prep.filter_by_missing(max_miss=0.10),
-                    prep.impute(imputer),
-                    prep.filter_by_maf(min_maf=0.10),
-                    prep.standardize()
-                    ])
-    
+    preprocess = prep.compose(
+        [
+            prep.filter_by_missing(max_miss=0.10),
+            prep.impute(imputer),
+            prep.filter_by_maf(min_maf=0.10),
+            prep.standardize(),
+        ]
+    )
+
     # define filtering function
     filter = gs.unique_variants
-    
+
     # loop on geno
     queue = gs.GenoQueue(G, bim, batch_size=200, preprocess=preprocess)
     for _G, _bim in queue:
         # run genetic analysis
-        print('Result:', np.einsum('is,is->', random.rand(*_G.shape), _G))
+        print("Result:", np.einsum("is,is->", random.rand(*_G.shape), _G))
 
+.. testoutput::
 
+                id      rsid chrom     pos  nalleles allele_ids    i
+    0      SNPID_2    RSID_2    01    2000         2        A,G    0
+    1      SNPID_3    RSID_3    01    3000         2        A,G    1
+    2      SNPID_4    RSID_4    01    4000         2        A,G    2
+    3      SNPID_5    RSID_5    01    5000         2        A,G    3
+    4      SNPID_6    RSID_6    01    6000         2        A,G    4
+    5      SNPID_7    RSID_7    01    7000         2        A,G    5
+    6      SNPID_8    RSID_8    01    8000         2        A,G    6
+    7      SNPID_9    RSID_9    01    9000         2        A,G    7
+    8     SNPID_10   RSID_10    01   10000         2        A,G    8
+    9     SNPID_11   RSID_11    01   11000         2        A,G    9
+    10    SNPID_12   RSID_12    01   12000         2        A,G   10
+    11    SNPID_13   RSID_13    01   13000         2        A,G   11
+    12    SNPID_14   RSID_14    01   14000         2        A,G   12
+    13    SNPID_15   RSID_15    01   15000         2        A,G   13
+    14    SNPID_16   RSID_16    01   16000         2        A,G   14
+    15    SNPID_17   RSID_17    01   17000         2        A,G   15
+    16    SNPID_18   RSID_18    01   18000         2        A,G   16
+    17    SNPID_19   RSID_19    01   19000         2        A,G   17
+    18    SNPID_20   RSID_20    01   20000         2        A,G   18
+    19    SNPID_21   RSID_21    01   21000         2        A,G   19
+    20    SNPID_22   RSID_22    01   22000         2        A,G   20
+    21    SNPID_23   RSID_23    01   23000         2        A,G   21
+    22    SNPID_24   RSID_24    01   24000         2        A,G   22
+    23    SNPID_25   RSID_25    01   25000         2        A,G   23
+    24    SNPID_26   RSID_26    01   26000         2        A,G   24
+    25    SNPID_27   RSID_27    01   27000         2        A,G   25
+    26    SNPID_28   RSID_28    01   28000         2        A,G   26
+    27    SNPID_29   RSID_29    01   29000         2        A,G   27
+    28    SNPID_30   RSID_30    01   30000         2        A,G   28
+    29    SNPID_31   RSID_31    01   31000         2        A,G   29
+    ..         ...       ...   ...     ...       ...        ...  ...
+    169  SNPID_171  RSID_171    01   71001         2        A,G  169
+    170  SNPID_172  RSID_172    01   72001         2        A,G  170
+    171  SNPID_173  RSID_173    01   73001         2        A,G  171
+    172  SNPID_174  RSID_174    01   74001         2        A,G  172
+    173  SNPID_175  RSID_175    01   75001         2        A,G  173
+    174  SNPID_176  RSID_176    01   76001         2        A,G  174
+    175  SNPID_177  RSID_177    01   77001         2        A,G  175
+    176  SNPID_178  RSID_178    01   78001         2        A,G  176
+    177  SNPID_179  RSID_179    01   79001         2        A,G  177
+    178  SNPID_180  RSID_180    01   80001         2        A,G  178
+    179  SNPID_181  RSID_181    01   81001         2        A,G  179
+    180  SNPID_182  RSID_182    01   82001         2        A,G  180
+    181  SNPID_183  RSID_183    01   83001         2        A,G  181
+    182  SNPID_184  RSID_184    01   84001         2        A,G  182
+    183  SNPID_185  RSID_185    01   85001         2        A,G  183
+    184  SNPID_186  RSID_186    01   86001         2        A,G  184
+    185  SNPID_187  RSID_187    01   87001         2        A,G  185
+    186  SNPID_188  RSID_188    01   88001         2        A,G  186
+    187  SNPID_189  RSID_189    01   89001         2        A,G  187
+    188  SNPID_190  RSID_190    01   90001         2        A,G  188
+    189  SNPID_191  RSID_191    01   91001         2        A,G  189
+    190  SNPID_192  RSID_192    01   92001         2        A,G  190
+    191  SNPID_193  RSID_193    01   93001         2        A,G  191
+    192  SNPID_194  RSID_194    01   94001         2        A,G  192
+    193  SNPID_195  RSID_195    01   95001         2        A,G  193
+    194  SNPID_196  RSID_196    01   96001         2        A,G  194
+    195  SNPID_197  RSID_197    01   97001         2        A,G  195
+    196  SNPID_198  RSID_198    01   98001         2        A,G  196
+    197  SNPID_199  RSID_199    01   99001         2        A,G  197
+    198  SNPID_200  RSID_200    01  100001         2        A,G  198
+    <BLANKLINE>
+    [199 rows x 7 columns]
+    dask.array<getitem, shape=(199, 500), dtype=float64, chunksize=(199, 500)>
+    .. read 9 / 9 variants (100.00%)
+    Result: -13.85549311486657

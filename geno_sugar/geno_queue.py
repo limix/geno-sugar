@@ -37,7 +37,10 @@ class GenoQueue:
             raise StopIteration
         else:
             _end = self.current + self.batch_size
-            Isnp = (self.bim.i >= self.current) & (self.bim.i < _end)
+            # Isnp = (self.bim.i >= self.current) & (self.bim.i < _end)
+            Isnp = (self.bim.index.values >= self.current) & (
+                self.bim.index.values < _end
+            )
             G_out, bim_out = snp_query(self.G, self.bim, Isnp)
             self.visited_snps += G_out.shape[0]
             G_out = G_out.compute().T
@@ -45,9 +48,9 @@ class GenoQueue:
                 G_out, bim_out = self.preprocess(G_out, bim_out)
             self.current = _end
             if self.verbose:
-                fraction = 100. * self.visited_snps / float(self.G.shape[0])
-                msg = '.. read %d / %d variants (%.2f%%)'
-                msg %= (self.visited_snps,  self.G.shape[0], fraction)
+                fraction = 100.0 * self.visited_snps / float(self.G.shape[0])
+                msg = ".. read %d / %d variants (%.2f%%)"
+                msg %= (self.visited_snps, self.G.shape[0], fraction)
                 print(msg)
             return G_out, bim_out
 
