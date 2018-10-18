@@ -6,20 +6,10 @@ Utility functions to read bed and bgen files and facilitate genome-wide analyses
 
 ## Install
 
-* Install geno sugar:
+```bash
+pip install geno-sugar
+```
 
-    ```bash
-    git clone https://github.com/limix/geno-sugar.git
-    cd geno-sugar
-    pip install .
-    ```
+## Documentation
 
-* Build the documentation::
-
-    ```bash
-    cd doc
-    make html
-    ```
-
-The documentation is in HTML and will be available at
-``_build/html/index.html``.
+Examples and public interface can be found [here](https://geno-sugar.readthedocs.io/en/latest/install.html)
