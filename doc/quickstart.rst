@@ -60,9 +60,6 @@ of reading them.
         ]
     )
     
-    # define filtering function
-    filter = gs.unique_variants
-    
     # loop on geno
     queue = gs.GenoQueue(G, bim, batch_size=200, preprocess=preprocess)
     for _G, _bim in queue:
@@ -283,9 +280,6 @@ Bgen file example
             prep.standardize(),
         ]
     )
-
-    # define filtering function
-    filter = gs.unique_variants
 
     # loop on geno
     queue = gs.GenoQueue(G, bim, batch_size=200, preprocess=preprocess)
