@@ -1,6 +1,5 @@
 import scipy as sp
 import pandas as pd
-import dask.array as da
 
 
 def snp_query(G, bim, Isnp):
@@ -85,4 +84,4 @@ def unique_variants(G):
     v, ix = sp.unique(_s, return_index=True)
     ix = sp.sort(ix)
     G_out = G[:, ix]
-    return G_out, Isnp
+    return G_out, ix
