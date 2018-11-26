@@ -1,6 +1,6 @@
 # geno-sugar
 
-[![Travis](https://img.shields.io/travis/com/limix/geno-sugar.svg?style=flat-square&label=linux%20%2F%20macos%20build)](https://travis-ci.com/limix/geno-sugar)[![Documentation](https://img.shields.io/readthedocs/limix-lmm.svg?style=flat-square&version=stable)](https://limix-lmm.readthedocs.io/)
+[![Travis](https://img.shields.io/travis/com/limix/geno-sugar.svg?style=flat-square&label=linux%20%2F%20macos%20build)](https://travis-ci.com/limix/geno-sugar)[![Documentation](https://img.shields.io/readthedocs/geno-sugar.svg?style=flat-square&version=stable)](https://limix-lmm.readthedocs.io/)
 
 Utility functions to read bed and bgen files and facilitate genome-wide analyses.
 While this can be used as a standalone module, this module has been designed to be a building block of [LIMIX2](https://limix.readthedocs.io/en/2.0.0/index.html). LIMIX2 is a python module that makes available a large set of tools for genetic studies, including statistical methods for GWAS, interaction testing and variance component estimation.
