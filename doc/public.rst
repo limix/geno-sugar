@@ -30,7 +30,7 @@ Utils
 .. automodule:: geno_sugar.utils
   :members:
 
-  
+
 .. _genoqueue_ref:
 
 Geno Queue
